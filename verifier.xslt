@@ -21,8 +21,8 @@
             is valid grade 
         </xsl:if>
         <xsl:if test="@attempt &gt; 1">
-            <xsl:message>Found a non-1 attempt - checking parents for <xsl:value-of select="."/> and their attempt value is <xsl:value-of select="../@attempt"/></xsl:message>"
-            <xsl:if test="../@attempt != (./@attempt - 1)">
+            <xsl:message>Found a non-1 attempt - checking parents for <xsl:value-of select="."/> and their attempt value is <xsl:value-of select="ancestor::grade/@attempt"/></xsl:message>"
+            <xsl:if test="../@attempt != (./[@attempt] - 1)">
                 <xsl:message terminate="yes">Improper sequence of grades</xsl:message>
             </xsl:if>
         </xsl:if>
