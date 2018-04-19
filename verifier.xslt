@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:template match="/">
-        <xsl:for-each select="university/students/student/courses/course/grade">
-            <xsl:value-of select="."/>
-        </xsl:for-each>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="xs"
+    version="2.0">
+    
+    <xsl:template match="grade">
+        <xsl:value-of select="@type"/> <xsl:value-of select="."/>
+        <xsl:if test="@type = 'complex'">
+            <xsl:if test=". &gt; 5.0 or . &lt; 1.0">
+                <xsl:message terminate="yes">Grade <xsl:value-of select="."/> bad range</xsl:message>
+            </xsl:if>
+            is valid grade 
+        </xsl:if>
+        <xsl:if test="@type = 'simple'">
+            <xsl:if test=". != 1.0 and . != 1.3 and . != 1.7 and . != 2.0 and . != 2.3 and . != 2.7 and . != 3.0 and . != 3.3 and . != 3.7 and . != 4.0 and . != 4.3 and . != 4.7 and . != 5.0">
+                <xsl:message terminate="yes">Grade <xsl:value-of select="."/> not of simple type</xsl:message>
+            </xsl:if>
+            is valid grade 
+        </xsl:if>
     </xsl:template>
 </xsl:stylesheet>
