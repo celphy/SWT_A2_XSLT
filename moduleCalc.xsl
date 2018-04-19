@@ -6,16 +6,14 @@
     <xsl:template match="course">
         <xsl:if test="./@cid = 'IM130'">
             <xsl:for-each select="./grade/course">
-                <xsl:if test="./@attempt = 3 and . &lt; 4.0">
+                <xsl:if test="./@attempt = 3 and . &gt; 4.0">
                     <xsl:message terminate="yes">
                         IM130 has been failed with no recourse.
                     </xsl:message>
                 </xsl:if>
             </xsl:for-each>
             <xsl:for-each select="./grade/course">
-                <xsl:attribute name="../../@grade" select="">
-                    
-                </xsl:attribute>
+                
             </xsl:for-each>
         </xsl:if>
     </xsl:template>
