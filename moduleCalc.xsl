@@ -6,8 +6,8 @@
     <xsl:template match="course">
         <xsl:if test="./@cid = 'IM130'">
             
-            <xsl:variable name="complexGrade" select="sum(for $i in . return $i) div count(../course)"/>
-            
+            <xsl:variable name="complexGrade" select="sum(for $i in ./course/grade return $i) div count(./course/grade)"/>
+            <xsl:message>Sum is <xsl:value-of select="sum(for $i in ./course/grade return $i)"/> and count is <xsl:value-of select="count(./course/grade)"/> </xsl:message>
             <xsl:for-each select="./grade/course">
                 <xsl:if test="./@attempt = 3 and . &gt; 4.0">
                     <xsl:message terminate="yes">
@@ -16,7 +16,7 @@
                 </xsl:if>
             </xsl:for-each>
             
-            <xsl:message>Complexe Course Grade is <xsl:value-of select="."/></xsl:message>
+            <xsl:message>Complexe Course Grade is <xsl:value-of select="$complexGrade"/> </xsl:message>
             
         </xsl:if>
     </xsl:template>
